@@ -23,6 +23,10 @@ public interface UserService {
 
 	//修该
 	int editUser(User user);
+	//删除用户
+	int deleteUser(Integer id);
+	//批量删除
+	int deletes(Integer[] ids);
 
 
 

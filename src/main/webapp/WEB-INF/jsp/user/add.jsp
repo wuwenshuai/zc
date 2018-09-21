@@ -148,7 +148,7 @@
                             <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
                         </div>
                         <button type="button" id="addBtn" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="button" id="czbtn" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -232,6 +232,11 @@
                 layer.msg("用户数据保存失败", {time:2000, icon:5, shift:6});
             }
         })
+    });
+
+    //重置
+    $("#czbtn").click(function () {
+        $("#editform")[0].reset();
     });
 </script>
 </body>
