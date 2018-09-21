@@ -102,7 +102,6 @@ public class UserController {
 	}
 
 	//修改
-
 	@RequestMapping("/edit")
 	@ResponseBody
 	public AjaxResult edit(User user){
@@ -114,7 +113,50 @@ public class UserController {
 				result.setMessage("success");
 			}else {
 				result.setSuccess(false);
-				result.setMessage("error");
+				result.setMessage("修改失败");
+			}
+		}catch (Exception e){
+			result.setSuccess(false);
+			result.setMessage("error");
+		}
+		return result;
+
+	}
+
+	//删除
+	@RequestMapping("/delete")
+	@ResponseBody
+	public AjaxResult delete(Integer id){
+		AjaxResult result = new AjaxResult();
+		try {
+			int i = userService.deleteUser(id);
+			if (i>0){
+				result.setSuccess(true);
+				result.setMessage("success");
+			}else {
+				result.setSuccess(false);
+				result.setMessage("删除失败");
+			}
+		}catch (Exception e){
+			result.setSuccess(false);
+			result.setMessage("error");
+		}
+		return result;
+
+	}
+	//批量删除
+	@RequestMapping("/deletes")
+	@ResponseBody
+	public AjaxResult deletes(Integer[] id){
+		AjaxResult result = new AjaxResult();
+		try {
+			int i = userService.deletes(id);
+			if (i>0){
+				result.setSuccess(true);
+				result.setMessage("success");
+			}else {
+				result.setSuccess(false);
+				result.setMessage("批量删除失败");
 			}
 		}catch (Exception e){
 			result.setSuccess(false);

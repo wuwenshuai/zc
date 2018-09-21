@@ -78,5 +78,20 @@ public class UserServiceImpl implements UserService {
         return i;
     }
 
+    @Override
+    public int deleteUser(Integer id) {
+        int i = userMapper.deleteByPrimaryKey(id);
+        return i;
+    }
+
+    @Override
+    public int deletes(Integer[] ids) {
+        int i = 0;
+        for (Integer id : ids){
+             i = userMapper.deleteByPrimaryKey(id);
+        }
+        return i;
+    }
+
 
 }
