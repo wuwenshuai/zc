@@ -16,7 +16,8 @@
 		delete from t_user
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.User">
+	<!--返回自增主键-->
+	<insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.User" useGeneratedKeys="true" keyProperty="id">
 		insert into t_user (id,
 		loginacct, userpswd,
 		username, email, createtime
@@ -32,14 +33,11 @@
 		update t_user
 		set
 		loginacct = #{loginacct,jdbcType=VARCHAR},
-		userpswd =
-		#{userpswd,jdbcType=CHAR},
 		username = #{username,jdbcType=VARCHAR},
-		email = #{email,jdbcType=VARCHAR},
-		createtime =
-		#{createtime,jdbcType=CHAR}
+		email = #{email,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select id, loginacct, userpswd, username, email,
@@ -53,10 +51,36 @@
 		from t_user
 	</select>
 
+
+	<select id="selectUserCount" resultType="int">
+		select count(*) from t_user
+		<where>
+			<if test="queryText!=null">
+				loginacct like concat('%',#{queryText},'%')
+			</if>
+		</where>
+	</select>
+
+
 	<select id="queryUserlogin" parameterType="map" resultMap="BaseResultMap">
 		select id, loginacct, userpswd,
 		username, email, createtime
 		from t_user where loginacct=#{loginacct} and userpswd=#{userpswd}
 	</select>
+
+
+    <select id="queryList" resultMap="BaseResultMap">
+		select id, loginacct, userpswd,
+		username, email, createtime
+		from t_user
+		<where>
+			<if test="queryText!=null">
+				loginacct like concat('%',#{queryText},'%')
+			</if>
+		</where>
+		order by createtime desc
+		limit #{startIndex},#{pagesize}
+	</select>
+
 
 </mapper>
