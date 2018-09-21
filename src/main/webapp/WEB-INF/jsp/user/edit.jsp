@@ -128,27 +128,27 @@
             <ol class="breadcrumb">
                 <li><a href="#">首页</a></li>
                 <li><a href="#">数据列表</a></li>
-                <li class="active">新增</li>
+                <li class="active">修改</li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="addform">
+                    <form id="editform">
                         <div class="form-group">
                             <label for="floginacct">登陆账号</label>
-                            <input type="text" class="form-control" id="floginacct" placeholder="请输入登陆账号">
+                            <input type="text" class="form-control" id="floginacct" value="${user.loginacct}">
                         </div>
                         <div class="form-group">
                             <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" id="fusername" placeholder="请输入用户名称">
+                            <input type="text" class="form-control" id="fusername" value="${user.username}">
                         </div>
                         <div class="form-group">
                             <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" id="femail" placeholder="请输入邮箱地址">
+                            <input type="email" class="form-control" id="femail" value="${user.email}">
                             <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
                         </div>
-                        <button type="button" id="addBtn" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="button" class="btn btn-success" id="editBtn"><i class="glyphicon glyphicon-edit"></i> 修改</button>
+                        <button type="button" id="czbtn" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -181,7 +181,6 @@
         </div>
     </div>
 </div>
-
 <script src="${APP_PATH }/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH }/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH }/script/docs.min.js"></script>
@@ -200,38 +199,40 @@
         });
     });
 
-    $("#addBtn").click(function () {
-        //发送ajax请求
-        //封装请求参数
-        var loginacct = $("#floginacct");
-        var username = $("#fusername");
-        var email = $("#femail");
-        var loadingIndex = -1 ;
+    $("#editBtn").click(function(){
+        var floginacct = $("#floginacct");
+        var fusername = $("#fusername");
+        var femail = $("#femail");
+
+
         $.ajax({
-            type:"post",
-            url:"${APP_PATH}/user/add.do",
-            data:{
-                loginacct:loginacct.val(),
-                username:username.val(),
-                email:email.val()
+            type : "POST",
+            data : {
+                "loginacct" : floginacct.val(),
+                "username" : fusername.val(),
+                "email" : femail.val(),
+                "id" : "${user.id}"
             },
-            beforeSend:function () {
-                loadingIndex = layer.load(2, {time: 10*1000});
-                return true;
+            url : "${APP_PATH}/user/edit.do",
+            beforeSend : function() {
+                return true ;
             },
-            success:function (result) {
-                if (result.success){
-                    //添加成功，跳到列表页面
-                    layer.msg("用户数据保存成功", {time:1000, icon:6});
+            success : function(result){
+                if(result.success){
                     window.location.href="${APP_PATH}/user/toIndex.htm";
-                }else {
-                    layer.msg("用户数据保存失败", {time:1000, icon:5, shift:6});
+                }else{
+                    layer.msg("修改用户失败", {time:1000, icon:5, shift:6});
                 }
             },
-            error:function (result) {
-                layer.msg("用户数据保存失败", {time:2000, icon:5, shift:6});
+            error : function(){
+                layer.msg("修改失败", {time:1000, icon:5, shift:6});
             }
-        })
+        });
+    });
+
+    //重置
+    $("#czbtn").click(function () {
+       $("#editform")[0].reset();
     });
 </script>
 </body>

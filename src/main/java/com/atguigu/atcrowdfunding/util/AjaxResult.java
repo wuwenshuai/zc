@@ -2,25 +2,33 @@ package com.atguigu.atcrowdfunding.util;
 
 public class AjaxResult {
 
-	private boolean success ;
-	private String message ;
+    private boolean success ;
+    private String message ;
 
-	public boolean getSuccess() {
-		return success;
-	}
+    private Page page ;
 
-	public void setSuccess(boolean success) {
-		this.success = success;
-	}
+    public boolean getSuccess() {
+        return success;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
-	
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Page getPage() {
+        return page;
+    }
+
+    public void setPage(Page page) {
+        this.page = page;
+    }
 	
 }
