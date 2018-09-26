@@ -333,9 +333,8 @@
     //拿到全选的checkbox
     $("#checkboxs").click(function () {
          var checkboxsStatus = this.checked;//true or false
-        alert(checkboxsStatus);
         //让下面的文本框的状态保持一致
-        $("tbody tr td input[type='checkbox']").attr("checked",checkboxsStatus);
+        $("tbody tr td input[type='checkbox']").prop("checked",checkboxsStatus);
     });
 
 
