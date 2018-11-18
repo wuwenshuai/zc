@@ -56,7 +56,9 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <div class="tree">
-                <ul style="padding-left:0px;" class="list-group">
+
+               <jsp:include page="/WEB-INF/jsp/common/menu.jsp"></jsp:include>
+           <%--    <ul style="padding-left:0px;" class="list-group">
                     <li class="list-group-item tree-closed" >
                         <a href="main.html"><i class="glyphicon glyphicon-dashboard"></i> 控制面板</a>
                     </li>
@@ -64,7 +66,7 @@
                         <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span>
                         <ul style="margin-top:10px;display:none;">
                             <li style="height:30px;">
-                                <a href="${APP_PATH }/user/toIndex.do"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+                                <a href="${APP_PATH }/user/index.htm"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
                             </li>
                             <li style="height:30px;">
                                 <a href="role.html"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
@@ -117,7 +119,7 @@
                     <li class="list-group-item tree-closed" >
                         <a href="param.html"><i class="glyphicon glyphicon-list-alt"></i> 参数管理</a>
                     </li>
-                </ul>
+                </ul>--%>
             </div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

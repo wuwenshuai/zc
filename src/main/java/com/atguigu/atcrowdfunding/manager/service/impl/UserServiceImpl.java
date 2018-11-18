@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.atguigu.atcrowdfunding.bean.Role;
+import com.atguigu.atcrowdfunding.util.Data;
 import com.atguigu.atcrowdfunding.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
 		List<User> datas = userMapper.queryList(paramMap);
 
-		page.setDatas(datas);
+		page.setData(datas);
 
 		Integer totalsize = userMapper.selectUserCount(paramMap);
 
@@ -91,6 +93,26 @@ public class UserServiceImpl implements UserService {
              i = userMapper.deleteByPrimaryKey(id);
         }
         return i;
+    }
+
+    @Override
+    public List<Integer> queryRoleIdByUserId(Integer id) {
+        return userMapper.queryRoleByUserid(id);
+    }
+
+    @Override
+    public List<Role> queryAllRole() {
+        return userMapper.querAllRole();
+    }
+
+    @Override
+    public void saveUserRoleRelationship(Data data, Integer userid) {
+        userMapper.saveUserRoleRelationship(data,userid);
+    }
+
+    @Override
+    public void deleteUserRoleRelationship(Data data, Integer userid) {
+        userMapper.deleteUserRoleRelationship(data,userid);
     }
 
 

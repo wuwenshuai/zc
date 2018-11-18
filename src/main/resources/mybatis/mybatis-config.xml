@@ -5,6 +5,11 @@
         <typeAlias type="User" alias="user"/>
     </typeAliases> -->
 
+
+    <typeAliases>
+        <!-- <typeAlias type="User" alias="user"/> -->
+        <package name="com.atguigu.atcrowdfunding.bean"/>
+    </typeAliases>
     <plugins>
         <!-- com.github.pagehelper 为 PageHelper 类所在包名 -->
         <plugin interceptor="com.github.pagehelper.PageHelper">

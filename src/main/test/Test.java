@@ -4,12 +4,7 @@ import com.atguigu.atcrowdfunding.util.MD5Util;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- * @Auther: wuwenshuai
- * @Date: 2018/9/19 15:27
- * @Description:
- */
-public class Test1 {
+public class Test {
 
     public static void main(String[] args) throws Exception {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("spring/spring*.xml");

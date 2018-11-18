@@ -82,5 +82,26 @@
 		limit #{startIndex},#{pagesize}
 	</select>
 
+	<select id="querAllRole" resultType="com.atguigu.atcrowdfunding.bean.Role">
+		select id,name from t_role
+	</select>
+	<select id="queryRoleByUserid" parameterType="int" resultType="int">
+		select roleid from t_user_role where userid=#{id}
+	</select>
+	<!--添加用户角关系表-->
+	<insert id="saveUserRoleRelationship" >
+		<foreach collection="data.ids" item="roleid" separator=";">
+		insert into t_user_role (roleid,userid) value (#{roleid},#{userid})
+		</foreach>
+	</insert>
+
+	<!--删除用户与角色的关系-->
+	<delete id="deleteUserRoleRelationship">
+		delete from t_user_role where userid=#{userid} and roleid in
+		<foreach collection="data.ids" item="roleid" open="(" separator="," close=")">
+			#{roleid}
+		</foreach>
+	</delete>
+
 
 </mapper>
