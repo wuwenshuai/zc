@@ -7,6 +7,8 @@ public class AjaxResult {
 
     private Page page ;
 
+    private Object data ;
+
     public boolean getSuccess() {
         return success;
     }
@@ -30,5 +32,15 @@ public class AjaxResult {
     public void setPage(Page page) {
         this.page = page;
     }
-	
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+
+
 }

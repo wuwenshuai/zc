@@ -5,26 +5,104 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_role
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.Role" >
-    insert into t_role (id, name)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+
+
+
+
+
+  <select id="queryCount" resultType="int">
+    select count(*) from t_role
+    <where>
+      <if test="queryText!=null">
+        name like concat('%',#{queryText},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="pageQuery" resultType="Role">
+    select * from t_role
+    <where>
+      <if test="queryText!=null">
+        name like concat('%',#{queryText},'%')
+      </if>
+    </where>
+    limit #{startIndex}, #{pagesize}
+  </select>
+
+  <insert id="insert">
+    insert into t_role (
+    name
+    ) values (
+    #{name}
+    )
+    <selectKey keyProperty="id" resultType="int">
+      select @@identity as id
+    </selectKey>
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.Role" >
-    update t_role
-    set name = #{name,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, name
-    from t_role
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, name
-    from t_role
-  </select>
+
+  <select id="getRole" resultType="Role">
+    	select * from t_role where id=#{id}
+    </select>
+
+
+  <update id="update" parameterType="Role">
+        update t_role
+        set name = #{name}
+        where id = #{id}
+    </update>
+  <delete id="delete">
+        delete from t_role where id = #{id}
+    </delete>
+
+  <delete id="batchDelete">
+    delete from t_role where id in
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+
+
+  <delete id="batchDeleteObj">
+    delete from t_role where id in
+    <foreach collection="datas" item="role" open="(" close=")" separator=",">
+      #{role.id}
+    </foreach>
+  </delete>
+
+  <select id="queryAllRole" resultType="Role">
+    	select * from t_role
+    </select>
+
+  <select id="queryRoleidByUserid" resultType="integer">
+    	select roleid from t_user_role where userid=#{id}
+    </select>
+
+
+  <!-- 给角色分配许可 -->
+  <insert id="saveRolePermissionRelationship" >
+    insert into t_role_permission(roleid,permissionid) values
+    <foreach collection="permissionIds" separator="," item="permissionid">
+      (#{roleid},#{permissionid})
+    </foreach>
+  </insert>
+
+  <insert id="saveUserRole">
+    <foreach collection="roleids" item="roleid" separator=";">
+      insert into t_user_role(userid,roleid) values(#{userid},#{roleid})
+    </foreach>
+  </insert>
+
+  <delete id="deleteUserRole">
+    <foreach collection="roleids" item="roleid" separator=";">
+      delete from t_user_role where userid=#{userid} and roleid=#{roleid}
+    </foreach>
+  </delete>
+
+  <insert id="insertRolePermission">
+		insert into t_role_permission(roleid,permissionid) values(#{roleid},#{permissionid})
+	</insert>
+
+  <delete id="deleteRolePermissionRelationship">
+    	delete from t_role_permission where roleid=#{roleid}
+    </delete>
 </mapper>
