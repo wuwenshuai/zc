@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.util.Data;
 import com.atguigu.atcrowdfunding.util.Page;
@@ -115,5 +116,9 @@ public class UserServiceImpl implements UserService {
         userMapper.deleteUserRoleRelationship(data,userid);
     }
 
+    @Override
+    public List<Permission> queryPermissionByUserid(Integer id) {
+        return userMapper.queryPermissionByUserid(id);
+    }
 
 }

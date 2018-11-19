@@ -3,6 +3,7 @@ package com.atguigu.atcrowdfunding.manager.service;
 import java.util.List;
 import java.util.Map;
 
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.util.Data;
@@ -41,4 +42,6 @@ public interface UserService {
 
 	//删除用户角色关系
 	void  deleteUserRoleRelationship(Data data,Integer userid);
+
+	List<Permission> queryPermissionByUserid(Integer id);
 }

@@ -12,7 +12,7 @@ public class Data {
 	private List<User> datas = new ArrayList<User>();
 
 	private List<Integer> ids ;
-	
+
 	private List<MemberCert> certimgs = new ArrayList<MemberCert>();
 
 	public List<User> getUserList() {
@@ -47,6 +47,6 @@ public class Data {
 		this.certimgs = certimgs;
 	}
 
-	
+
 
 }
