@@ -142,9 +142,12 @@ public class PermissionController extends BaseController {
 					root.add(permission);
 				}else{
 					try {
-						//父节点
-						Permission parent = map.get(child.getPid());
-						parent.getChildren().add(child);
+					    if (child.getPid() !=null){
+                            //父节点
+                            Permission parent = map.get(child.getPid());
+                            parent.getChildren().add(child);
+                        }
+
 					}catch (Exception e){
 						e.printStackTrace();
 					}
