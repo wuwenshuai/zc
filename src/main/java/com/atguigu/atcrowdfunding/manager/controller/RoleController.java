@@ -82,8 +82,10 @@ public class RoleController extends BaseController {
 			}else{
 				//父节点
 				try{
-					Permission parent = map.get(child.getPid());
-					parent.getChildren().add(child);
+				    if(child.getPid() !=null){
+                        Permission parent = map.get(child.getPid());
+                        parent.getChildren().add(child);
+                    }
 				}catch (Exception e){
 					e.printStackTrace();
 				}
